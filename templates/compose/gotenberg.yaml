@@ -7,7 +7,7 @@
 
 services:
   gotenberg:
-    image: gotenberg/gotenberg:latest
+    image: gotenberg/gotenberg:9.4.0
     environment:
       - SERVICE_URL_GOTENBERG_3000
       # NOTE: requires the --api-enable-basic-auth option in "command"

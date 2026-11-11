@@ -4,8 +4,10 @@ it('uses Gotenberg 9 health-check telemetry flag in the one-click template', fun
     $compose = file_get_contents(__DIR__.'/../../templates/compose/gotenberg.yaml');
 
     expect($compose)
+        ->toContain('gotenberg/gotenberg:9.4.0')
         ->toContain('--api-disable-health-check-route-telemetry')
         ->toContain('--api-enable-basic-auth')
+        ->not->toContain('gotenberg/gotenberg:latest')
         ->not->toContain('--api-disable-health-check-logging');
 
     foreach (['service-templates.json', 'service-templates-latest.json'] as $templateFile) {
@@ -20,8 +22,10 @@ it('uses Gotenberg 9 health-check telemetry flag in the one-click template', fun
         $generatedCompose = base64_decode($templates['gotenberg']['compose'], strict: true);
 
         expect($generatedCompose)
+            ->toContain('gotenberg/gotenberg:9.4.0')
             ->toContain('--api-disable-health-check-route-telemetry')
             ->toContain('--api-enable-basic-auth')
+            ->not->toContain('gotenberg/gotenberg:latest')
             ->not->toContain('--api-disable-health-check-logging');
     }
 });
